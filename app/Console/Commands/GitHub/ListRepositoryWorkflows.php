@@ -11,14 +11,17 @@ class ListRepositoryWorkflows extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'github:workflows
+        {owner : The owner or organisation.}
+        {repo : The repository we are looking at.}
+    ';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Buscar uma lista de fluxos de trabalho do GitHub pelo nome do repositório';
 
     /**
      * Execute the console command.

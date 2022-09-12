@@ -3,6 +3,7 @@
 namespace App\Console\Commands\GitHub;
 
 use Illuminate\Console\Command;
+use App\Http\Integrations\GitHub\Requests\ListRepositoryWorkflowsRequest;
 
 class ListRepositoryWorkflows extends Command
 {
@@ -28,8 +29,26 @@ class ListRepositoryWorkflows extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
-        return 0;
+        $owner = (string) $this->argument('owner');
+        $repo = (string) $this->argument('repo');
+
+        $request = new ListRepositoryWorkflowsRequest(
+            owner: $owner,
+            repo: $repo,
+        );
+
+        $request->withTokenAuth(
+            token: (string) config('services.github.token'),
+        );
+
+        $this->info(
+            string: "Buscando fluxos de trabalho para {$owner}/{$repo}",
+        );
+
+        $response = $request->send();
+
+        return self::SUCCESS;
     }
 }

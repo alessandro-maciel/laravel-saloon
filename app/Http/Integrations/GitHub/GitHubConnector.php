@@ -16,7 +16,7 @@ class GitHubConnector extends SaloonConnector
      */
     public function defineBaseUrl(): string
     {
-        return 'https://api.github.com';
+        return (string) config('services.github.url');
     }
 
     /**

@@ -36,6 +36,8 @@ class GitHubConnector extends SaloonConnector
      */
     public function defaultConfig(): array
     {
-        return [];
+        return [
+            'timeout' => 30,
+        ];
     }
 }

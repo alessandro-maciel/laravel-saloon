@@ -1,6 +1,4 @@
 ### Integrações de API usando Saloon em Laravel
-<br/>
-
 ## Saloon 
 > Um pacote Laravel / PHP que ajuda você a escrever belas integrações de API e SDKs.
 </br><br/>

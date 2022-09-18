@@ -3,6 +3,7 @@
 namespace App\Console\Commands\GitHub;
 
 use Illuminate\Console\Command;
+use App\Http\Integrations\GitHub\DataObjects\Workflow;
 use App\Http\Integrations\GitHub\Requests\ListRepositoryWorkflowsRequest;
 
 class ListRepositoryWorkflows extends Command
@@ -48,6 +49,15 @@ class ListRepositoryWorkflows extends Command
         );
 
         $response = $request->send();
+
+        if ($response->failed()) {
+            throw $response->toException();
+        }
+
+        $this->table(
+            headers: ['ID', 'Name', 'State'],
+            rows: $response->dto()->map(fn (Workflow $workflow) => $workflow->toArray())->toArray(),
+        );
 
         return self::SUCCESS;
     }
